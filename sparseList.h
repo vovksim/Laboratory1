@@ -62,6 +62,9 @@ public:
         }
     }
 
+    static bool comp(const std::pair<T, size_t> &a, const std::pair<T, size_t> &b) {
+        return a.second < b.second;
+    }
 };
 
 
