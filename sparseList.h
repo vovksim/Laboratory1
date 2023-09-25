@@ -64,7 +64,30 @@ public:
         }
     }
 
-    void showSparseList(std::ostream &out = std::cout) const{
+   std::pair<T, size_t>& find(T value) {
+        /*
+        if (value == defaultValue) {
+            for (size_t j = 0; j < capacity; j++) {
+                for (auto i: list) {
+                    if (i.second == j) {
+                        continue;
+                    } else {
+                        return j;
+                    }
+                }
+            }
+            return list.end();
+        }
+         throw std :: exception invalid_argument(); ???
+         */
+
+        /**
+         * https://stackoverflow.com/questions/22676301/find-pair-by-key-within-a-vector-of-pairs
+         */
+        return *std::find_if(list.begin(), list.end(), [&value](const std::pair<T, size_t>& element){ return element.first == value;});
+    }
+
+    void showSparseList(std::ostream &out = std::cout) const {
         for (auto i = list.cbegin(); i != list.cend(); i++) {
             out << "[" << "index: " << i->second << " " << "data: " << i->first << "]\n";
         }
