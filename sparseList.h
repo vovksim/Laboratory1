@@ -41,6 +41,10 @@ public:
         }
     }
 
+    void sortListIndex() {
+        list.sort(comp);
+    }
+
     void showList(std::ostream &out = std::cout) const {
         for (size_t i = 0; i < capacity; i++) {
             bool fromList = false;
