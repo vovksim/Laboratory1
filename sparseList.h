@@ -22,6 +22,10 @@ public:
 
     sparseList() = default;
 
+    size_t getCapacity() {
+        return capacity;
+    };
+
     void add(T data, size_t index) {
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
@@ -38,14 +42,15 @@ public:
     }
 
     void showList(std::ostream &out = std::cout) const {
-        auto iter = list.cbegin();
-        for (size_t i = 0; i < capacity || iter != list.cend(); i++) {
-            if (iter->second == i) {
-                out << "[" << "data: " << iter->first << " " << "index: " << iter->second << "]\n";
-                if (iter != list.cend()) {
-                    iter++;
+        for (size_t i = 0; i < capacity; i++) {
+            bool fromList = false;
+            for (auto j = list.begin(); j != list.end(); j++) {
+                if (j->second == i) {
+                    out << "[" << "data: " << j->first << " " << "index: " << j->second << "]\n";
+                    fromList = true;
                 }
-            } else {
+            }
+            if (!fromList) {
                 out << "[" << "data: " << defaultValue << " " << "index: " << i << "]\n";
             }
         }
