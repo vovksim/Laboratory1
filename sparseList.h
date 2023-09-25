@@ -21,9 +21,12 @@ public:
     }
 
     void add(T data, size_t index) {
+        if (data == defaultValue) {
+            throw std::invalid_argument("Error! Adding default value type to sparseList!");
+        }
         for (auto i = list.cbegin(); i != list.cend(); i++) {
             if (i->second == index) {
-                throw std::invalid_argument("Error! Element with this index alraedy in list!");
+                throw std::invalid_argument("Error! Element with this index already in list!");
             }
         }
         list.push_back(std::make_pair(data, index));
