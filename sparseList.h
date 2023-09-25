@@ -35,7 +35,6 @@ public:
         if (index >= capacity) {
             capacity = index + 1;
         }
-        list.sort();
     }
 
     void showList(std::ostream &out = std::cout) const {
