@@ -33,6 +33,21 @@ public:
         if (index >= capacity) {
             capacity = index + 1;
         }
+        list.sort();
+    }
+
+    void showList(std::ostream &out = std::cout) const {
+        auto iter = list.cbegin();
+        for (size_t i = 0; i < capacity || iter != list.cend(); i++) {
+            if (iter->second == i) {
+                out << "[" << "data: " << iter->first << " " << "index: " << iter->second << "]\n";
+                if (iter != list.cend()) {
+                    iter++;
+                }
+            } else {
+                out << "[" << "data: " << defaultValue << " " << "index: " << i << "]\n";
+            }
+        }
     }
 
 };
