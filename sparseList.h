@@ -45,6 +45,10 @@ public:
         list.sort(comp);
     }
 
+    void sortListValue() {
+        list.sort();
+    }
+
     void showList(std::ostream &out = std::cout) const {
         for (size_t i = 0; i < capacity; i++) {
             bool fromList = false;
