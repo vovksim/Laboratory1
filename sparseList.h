@@ -13,8 +13,13 @@ template<typename T>
 class sparseList {
 private:
     std::list<std::pair<T, size_t>> list{};
-    size_t capacity{};
+    size_t capacity{}; //actual list size with default values
+    T defaultValue{};
 public:
+    explicit sparseList(T defaultValue) {
+        this->defaultValue = defaultValue;
+    }
+
     void add(T data, size_t index) {
         for (auto i = list.cbegin(); i != list.cend(); i++) {
             if (i->second == index) {
