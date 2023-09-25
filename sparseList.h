@@ -44,7 +44,7 @@ public:
     void showList(std::ostream &out = std::cout) const {
         for (size_t i = 0; i < capacity; i++) {
             bool fromList = false;
-            for (auto j = list.begin(); j != list.end(); j++) {
+            for (auto j = list.cbegin(); j != list.cend(); j++) {
                 if (j->second == i) {
                     out << "[" << "data: " << j->first << " " << "index: " << j->second << "]\n";
                     fromList = true;
@@ -53,6 +53,12 @@ public:
             if (!fromList) {
                 out << "[" << "data: " << defaultValue << " " << "index: " << i << "]\n";
             }
+        }
+    }
+
+    void showSparseList(std::ostream &out = std::cout) {
+        for (auto i = list.cbegin(); i != list.cend(); i++) {
+            out << "[" << "data: " << i->first << " " << "index: " << i->second << "]\n";
         }
     }
 
