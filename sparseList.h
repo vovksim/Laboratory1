@@ -20,6 +20,8 @@ public:
         this->defaultValue = defaultValue;
     }
 
+    sparseList() = default;
+
     void add(T data, size_t index) {
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
