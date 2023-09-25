@@ -54,19 +54,19 @@ public:
             bool fromList = false;
             for (auto j = list.cbegin(); j != list.cend(); j++) {
                 if (j->second == i) {
-                    out << "[" << "data: " << j->first << " " << "index: " << j->second << "]\n";
+                    out << "[" << "index: " << j->second << " " << "data: " << j->first << "]\n";
                     fromList = true;
                 }
             }
             if (!fromList) {
-                out << "[" << "data: " << defaultValue << " " << "index: " << i << "]\n";
+                out << "[" << "index: " << i << " " << "index: " << defaultValue << "]\n";
             }
         }
     }
 
-    void showSparseList(std::ostream &out = std::cout) {
+    void showSparseList(std::ostream &out = std::cout) const{
         for (auto i = list.cbegin(); i != list.cend(); i++) {
-            out << "[" << "data: " << i->first << " " << "index: " << i->second << "]\n";
+            out << "[" << "index: " << i->second << " " << "data: " << i->first << "]\n";
         }
     }
 
