@@ -64,6 +64,18 @@ public:
         }
     }
 
+    std::pair<T, size_t> operator[](size_t index) {
+        if (index >= capacity) {
+            throw std::invalid_argument("Error! Index went out of bounds!");
+        }
+        for(auto i : list) {
+            if(i.second == index) {
+                return i;
+            }
+        }
+        // what if index is a default value?
+    }
+
    std::pair<T, size_t>& find(T value) {
         /*
         if (value == defaultValue) {
