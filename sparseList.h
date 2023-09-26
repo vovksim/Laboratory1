@@ -49,6 +49,11 @@ public:
         list.sort();
     }
 
+    //method to check find() result
+    std::pair<T,size_t>& end() {
+        return *list.end();
+    }
+
     void showList(std::ostream &out = std::cout) const {
         for (size_t i = 0; i < capacity; i++) {
             bool fromList = false;
@@ -64,39 +69,29 @@ public:
         }
     }
 
-    std::pair<T, size_t> operator[](size_t index) {
+    std::pair<T, size_t>& operator[](size_t index) {
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for(auto i : list) {
-            if(i.second == index) {
+        for (auto i: list) {
+            if (i.second == index) {
                 return i;
             }
         }
         // what if index is a default value?
     }
 
-   std::pair<T, size_t>& find(T value) {
-        /*
-        if (value == defaultValue) {
-            for (size_t j = 0; j < capacity; j++) {
-                for (auto i: list) {
-                    if (i.second == j) {
-                        continue;
-                    } else {
-                        return j;
-                    }
-                }
-            }
-            return list.end();
+    std::pair<T, size_t> &find(T value) {
+        if(value == defaultValue) {
+            throw std::invalid_argument("Error! Searching default value in sparseList.");
         }
-         throw std :: exception invalid_argument(); ???
-         */
-
-        /**
-         * https://stackoverflow.com/questions/22676301/find-pair-by-key-within-a-vector-of-pairs
-         */
-        return *std::find_if(list.begin(), list.end(), [&value](const std::pair<T, size_t>& element){ return element.first == value;});
+        for(auto& i : list) {
+            if(i.first == value) {
+                return i;
+            }
+        }
+        // not found
+        return *list.end();
     }
 
     void showSparseList(std::ostream &out = std::cout) const {
