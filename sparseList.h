@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <list>
+#include <vector>
 
 template<typename T>
 class sparseList {
@@ -63,7 +64,7 @@ public:
                 }
             }
             if (!fromList) {
-                out << "[" << "index: " << i << " " << "index: " << defaultValue << "]\n";
+                out << "[" << "index: " << i << " " << "data: " << defaultValue << "]\n";
             }
         }
     }
@@ -72,7 +73,7 @@ public:
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for (auto i = list.begin(); i!=list.end(); ++i) {
+        for (auto i = list.begin(); i != list.end(); ++i) {
             if (i->second == index) {
                 return *i;
             }
@@ -114,7 +115,22 @@ public:
     static bool comp(const std::pair<T, size_t> &a, const std::pair<T, size_t> &b) {
         return a.second < b.second;
     }
+
+    friend void operator<<(std::ostream &out, std::vector<T>);
 };
+
+template<typename T>
+std::ostream &operator<<(std::ostream &out, std::vector<T> vector) {
+    out << "[";
+    for (auto i = 0; i < vector.size(); i++) {
+        out << vector[i];
+        if(i<vector.size()-1) {
+            out << ",";
+        }
+    }
+    out << "]";
+    return out;
+}
 
 
 #endif //LAB1_4_2_SPARSELIST_H
