@@ -16,11 +16,28 @@ public:
     sparseMatrix(A defaultValue) {
         this->defaultValue = defaultValue;
     }
+
     sparseMatrix(A defaultValue, std::size_t capacity) {
         this->defaultValue = defaultValue;
         this->capacity = capacity;
     }
+
     sparseMatrix() = default;
+
+    void add(size_t row, size_t column, A data) {
+        if (data == defaultValue) {
+            throw std::invalid_argument("Error! Adding default value type to sparseList!");
+        }
+        for(auto iter : matrix) {
+            if(iter->get<0>(matrix) == row && iter->get<1>(matrix) == column) {
+                throw std::invalid_argument("Error! Element with this index already found!");
+            }
+        }
+        matrix.push_back(std::make_tuple(row,column,data));
+        if((row+1)*(column+1)>=capacity) {
+            capacity = (row+1)(column+1);
+        }
+    }
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
