@@ -73,21 +73,22 @@ public:
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for (auto &i: list) {
-            if (i.second == index) {
+        for (auto i = list.begin(); i!=list.end(); ++i) {
+            if (i->second == index) {
                 return *i;
             }
         }
-        // what if index is a default value?
+        //if default value
+        return *list.end();
     }
 
     std::pair<T, size_t> &find(T value) {
         if (value == defaultValue) {
             throw std::invalid_argument("Error! Searching default value in sparseList.");
         }
-        for (auto &i: list) {
-            if (i.first == value) {
-                return i;
+        for (auto i = list.begin(); i != list.end(); ++i) {
+            if (i->first == value) {
+                return *i;
             }
         }
         // not found
