@@ -63,7 +63,11 @@ public:
     }
 
     void sortIndex() {
-        std::sort(matrix.begin(),matrix.end(),comp);
+        std::sort(matrix.begin(), matrix.end(), indexSort);
+    }
+
+    static bool indexSort(const std::tuple<std::size_t, std::size_t, A> &a, const std::tuple<std::size_t, std::size_t, A> &b) {
+        return (std::get<0>(a) < std::get<0>(b) && std::get<1>(a) < std::get<1>(b));
     }
 
 };
