@@ -13,14 +13,10 @@ class sparseMatrix {
     std::size_t capacity{};
     std::vector<std::tuple<std::size_t, std::size_t, A>> matrix{};
     A defaultValue{};
+    std::size_t rowQuantity{};
 public:
     sparseMatrix(A defaultValue) {
         this->defaultValue = defaultValue;
-    }
-
-    sparseMatrix(A defaultValue, std::size_t capacity) {
-        this->defaultValue = defaultValue;
-        this->capacity = capacity;
     }
 
     sparseMatrix() = default;
@@ -36,9 +32,11 @@ public:
         }
         matrix.push_back(std::make_tuple(row, column, data));
         if ((row + 1) * (column + 1) >= capacity) {
-            capacity = (row + 1)*(column + 1);
+            capacity = (row + 1) * (column + 1);
+            rowQuantity= row + 1;
         }
     }
+
 
 };
 
