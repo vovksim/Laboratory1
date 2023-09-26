@@ -25,8 +25,8 @@ public:
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
         }
-        for (auto iter = 0; iter < matrix.size(); ++iter) {
-            if (std::get<0>(matrix[iter]) == row && std::get<1>(matrix[iter]) == column) {
+        for (auto iter : matrix) {
+            if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 throw std::invalid_argument("Error! Element with this index already found!");
             }
         }
@@ -36,6 +36,7 @@ public:
             rowQuantity = row + 1;
         }
     }
+
 
 };
 
