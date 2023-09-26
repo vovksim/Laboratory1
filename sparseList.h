@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <list>
-#include <algorithm>
 
 template<typename T>
 class sparseList {
