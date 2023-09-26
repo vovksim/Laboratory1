@@ -39,21 +39,6 @@ public:
         return capacity;
     };
 
-    void add(T data, size_t index) {
-        if (data == defaultValue) {
-            throw std::invalid_argument("Error! Adding default value type to sparseList!");
-        }
-        for (auto i = list.cbegin(); i != list.cend(); i++) {
-            if (i->second == index) {
-                throw std::invalid_argument("Error! Element with this index already in list!");
-            }
-        }
-        list.push_back(std::make_pair(data, index));
-        if (index >= capacity) {
-            capacity = index + 1;
-        }
-    }
-
     void sortListIndex() {
         list.sort(comp);
     }
@@ -79,6 +64,27 @@ public:
             if (!fromList) {
                 out << "[" << "index: " << i << " " << "data: " << defaultValue << "]\n";
             }
+        }
+    }
+
+    void showSparseList(std::ostream &out = std::cout) const {
+        for (auto i = list.cbegin(); i != list.cend(); i++) {
+            out << "[" << "index: " << i->second << " " << "data: " << i->first << "]\n";
+        }
+    }
+
+    void add(T data, size_t index) {
+        if (data == defaultValue) {
+            throw std::invalid_argument("Error! Adding default value type to sparseList!");
+        }
+        for (auto i = list.cbegin(); i != list.cend(); i++) {
+            if (i->second == index) {
+                throw std::invalid_argument("Error! Element with this index already in list!");
+            }
+        }
+        list.push_back(std::make_pair(data, index));
+        if (index >= capacity) {
+            capacity = index + 1;
         }
     }
 
@@ -119,12 +125,7 @@ public:
         return *(list.end());
     }
 
-    void showSparseList(std::ostream &out = std::cout) const {
-        for (auto i = list.cbegin(); i != list.cend(); i++) {
-            out << "[" << "index: " << i->second << " " << "data: " << i->first << "]\n";
-        }
-    }
-
+    //custom comparator for sort by index
     static bool comp(const std::pair<T, size_t> &a, const std::pair<T, size_t> &b) {
         return a.second < b.second;
     }
