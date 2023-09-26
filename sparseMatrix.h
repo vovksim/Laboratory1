@@ -20,6 +20,7 @@ public:
         this->defaultValue = defaultValue;
         this->capacity = capacity;
     }
+    sparseMatrix() = default;
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
