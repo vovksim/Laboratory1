@@ -25,7 +25,7 @@ public:
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
         }
-        for (auto iter : matrix) {
+        for (auto iter: matrix) {
             if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 throw std::invalid_argument("Error! Element with this index already found!");
             }
@@ -37,6 +37,23 @@ public:
         }
     }
 
+    void showMatrix(std::ostream &out = std::cout) {
+        for (std::size_t i = 0; i < rowQuantity; i++) {
+            for (std::size_t j = 0; j < capacity / rowQuantity; j++) {
+                bool isIndexed = false;
+                for (auto iter: matrix) {
+                    if (std::get<0>(iter) == i && std::get<1>(iter) == j) {
+                        out << std::get<2>(iter) << " ";
+                        isIndexed = true;
+                    }
+                }
+                if (!isIndexed) {
+                    out << defaultValue << " ";
+                }
+            }
+            std::cout << "\n";
+        }
+    }
 
 };
 
