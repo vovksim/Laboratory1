@@ -16,6 +16,10 @@ public:
     sparseMatrix(A defaultValue) {
         this->defaultValue = defaultValue;
     }
+    sparseMatrix(A defaultValue, std::size_t capacity) {
+        this->defaultValue = defaultValue;
+        this->capacity = capacity;
+    }
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
