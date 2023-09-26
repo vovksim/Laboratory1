@@ -55,6 +55,12 @@ public:
         }
     }
 
+    void showSparseMatrix(std::ostream &out = std:: cout) {
+        for(auto iter : matrix) {
+            out << "index:" << "(" << std::get<0>(iter) << "," << std::get<1>(iter) << ")" << " data: " << std::get<2>(iter) << "\n";
+        }
+    }
+
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
