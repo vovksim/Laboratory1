@@ -7,6 +7,7 @@
 
 #include<tuple>
 #include <vector>
+#include <algorithm>
 
 template<typename A>
 class sparseMatrix {
@@ -59,6 +60,10 @@ public:
         for(auto iter : matrix) {
             out << "index:" << "(" << std::get<0>(iter) << "," << std::get<1>(iter) << ")" << " data: " << std::get<2>(iter) << "\n";
         }
+    }
+
+    void sortIndex() {
+        std::sort(matrix.begin(),matrix.end(),comp);
     }
 
 };
