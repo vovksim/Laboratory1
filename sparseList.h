@@ -50,7 +50,7 @@ public:
     }
 
     //method to check find() result
-    std::pair<T,size_t>& end() {
+    std::pair<T, size_t> &end() {
         return *list.end();
     }
 
@@ -69,29 +69,40 @@ public:
         }
     }
 
-    std::pair<T, size_t>& operator[](size_t index) {
+    std::pair<T, size_t> &operator[](size_t index) {
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for (auto i: list) {
+        for (auto &i: list) {
             if (i.second == index) {
-                return i;
+                return *i;
             }
         }
         // what if index is a default value?
     }
 
     std::pair<T, size_t> &find(T value) {
-        if(value == defaultValue) {
+        if (value == defaultValue) {
             throw std::invalid_argument("Error! Searching default value in sparseList.");
         }
-        for(auto& i : list) {
-            if(i.first == value) {
+        for (auto &i: list) {
+            if (i.first == value) {
                 return i;
             }
         }
         // not found
         return *list.end();
+    }
+
+    template<typename Compare>
+    std::pair<T, size_t> &find_if(Compare comp, const T &value) {
+        for (auto it = list.begin(); it != list.end(); ++it) {
+            if (comp(it->first, value)) {
+                return *(it);
+            }
+        }
+        // If the value is not found, return the end iterator.
+        return *(list.end());
     }
 
     void showSparseList(std::ostream &out = std::cout) const {
