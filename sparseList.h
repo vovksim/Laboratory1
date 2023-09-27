@@ -41,6 +41,10 @@ public:
         listValueIndex.sort();
     }
 
+    T getDefaultValue() {
+        return defaultValue;
+    }
+
     //method to check find() result
     const std::pair<T, size_t> &end() const{
         return *(listValueIndex.cend());
