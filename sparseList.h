@@ -46,7 +46,7 @@ public:
     }
 
     //method to check find() result
-    const std::pair<T, size_t> &end() const{
+    const std::pair<T, size_t> &endSparseList() const{
         return *(listValueIndex.cend());
     }
 
@@ -109,7 +109,7 @@ public:
             }
         }
         // not found
-        return end();
+        return endSparseList();
     }
 
     template<typename Compare>
@@ -123,7 +123,7 @@ public:
             }
         }
         // not found
-        return end();
+        return endSparseList();
     }
 
     friend std::ostream &operator<<(std::ostream &out, std::vector<T> vector);
