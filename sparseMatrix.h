@@ -16,7 +16,8 @@ class sparseMatrix {
     A defaultValue{};
     std::size_t rowQuantity{};
 
-    static bool indexSort(const std::tuple<std::size_t, std::size_t, A> &a, const std::tuple<std::size_t, std::size_t, A> &b) {
+    static bool
+    indexSort(const std::tuple<std::size_t, std::size_t, A> &a, const std::tuple<std::size_t, std::size_t, A> &b) {
         return (std::get<0>(a) < std::get<0>(b) && std::get<1>(a) < std::get<1>(b));
     }
 
@@ -61,9 +62,10 @@ public:
         }
     }
 
-    void showSparseMatrix(std::ostream &out = std:: cout) {
-        for(auto iter : matrix) {
-            out << "index:" << "(" << std::get<0>(iter) << "," << std::get<1>(iter) << ")" << " data: " << std::get<2>(iter) << "\n";
+    void showSparseMatrix(std::ostream &out = std::cout) {
+        for (auto iter: matrix) {
+            out << "index:" << "(" << std::get<0>(iter) << "," << std::get<1>(iter) << ")" << " data: "
+                << std::get<2>(iter) << "\n";
         }
     }
 
@@ -71,16 +73,28 @@ public:
         std::sort(matrix.begin(), matrix.end(), indexSort);
     }
 
-    A& at(size_t row, size_t column) {
-        if((row+1)*(column+1) >= capacity) {
-            throw std :: invalid_argument("Error! Index went out of bounds!");
+    A &at(size_t row, size_t column) {
+        if ((row + 1) * (column + 1) >= capacity) {
+            throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for(auto iter : matrix) {
-            if(std :: get<0>(iter) == row && std :: get<1>(iter) == column) {
+        for (auto iter: matrix) {
+            if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 return std::get<2>(iter);
             }
         }
         return defaultValue;
+    }
+
+    const std::tuple<std::size_t, std::size_t, A> &find(A &value) {
+        if (value == defaultValue) {
+            throw std::invalid_argument("Error! Unable to find default value!");
+        }
+        for (const auto &iter: matrix) {
+            if (std::get<2>(iter) == value) {
+                return iter;
+            }
+        }
+        return *(matrix.cend());
     }
 
 };
