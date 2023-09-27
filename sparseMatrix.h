@@ -28,7 +28,7 @@ public:
 
     sparseMatrix() = default;
 
-    std::tuple<size_t,size_t,A>& end() {
+    std::tuple<size_t,size_t,A>& endSparseMatrix() {
         return *(matrix.cend());
     }
 
@@ -98,7 +98,7 @@ public:
                 return iter;
             }
         }
-        return *(matrix.cend());
+        return endSparseMatrix();
     }
 
 };
