@@ -12,7 +12,7 @@
 template<typename A>
 class sparseMatrix {
     std::size_t capacity{};
-    std::vector<std::tuple<std::size_t, std::size_t, A>> matrix{};
+    std::vector<std::tuple<std::size_t, std::size_t, A>> vectorIndexValue{};
     A defaultValue{};
     std::size_t rowQuantity{};
 
@@ -33,19 +33,19 @@ public:
     }
 
     const std::tuple<size_t, size_t, A> &endSparseMatrix() {
-        return *(matrix.cend());
+        return *(vectorIndexValue.cend());
     }
 
     void add(size_t row, size_t column, A data) {
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
         }
-        for (auto iter: matrix) {
+        for (auto iter: vectorIndexValue) {
             if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 throw std::invalid_argument("Error! Element with this index already found!");
             }
         }
-        matrix.push_back(std::make_tuple(row, column, data));
+        vectorIndexValue.push_back(std::make_tuple(row, column, data));
         if ((row + 1) * (column + 1) >= capacity) {
             capacity = (row + 1) * (column + 1);
             rowQuantity = row + 1;
@@ -56,7 +56,7 @@ public:
         for (std::size_t i = 0; i < rowQuantity; i++) {
             for (std::size_t j = 0; j < capacity / rowQuantity; j++) {
                 bool isIndexed = false;
-                for (auto iter: matrix) {
+                for (auto iter: vectorIndexValue) {
                     if (std::get<0>(iter) == i && std::get<1>(iter) == j) {
                         out << std::get<2>(iter) << " ";
                         isIndexed = true;
@@ -71,21 +71,21 @@ public:
     }
 
     void showSparseMatrix(std::ostream &out = std::cout) {
-        for (auto iter: matrix) {
+        for (auto iter: vectorIndexValue) {
             out << "index:" << "(" << std::get<0>(iter) << "," << std::get<1>(iter) << ")" << " data: "
                 << std::get<2>(iter) << "\n";
         }
     }
 
     void sortIndex() {
-        std::sort(matrix.begin(), matrix.end(), indexSort);
+        std::sort(vectorIndexValue.begin(), vectorIndexValue.end(), indexSort);
     }
 
     A &at(size_t row, size_t column) {
         if ((row + 1) * (column + 1) >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for (auto iter: matrix) {
+        for (auto iter: vectorIndexValue) {
             if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 return std::get<2>(iter);
             }
@@ -97,7 +97,7 @@ public:
         if (value == defaultValue) {
             throw std::invalid_argument("Error! Unable to find default value!");
         }
-        for (const auto &iter: matrix) {
+        for (const auto &iter: vectorIndexValue) {
             if (std::get<2>(iter) == value) {
                 return iter;
             }
@@ -110,7 +110,7 @@ public:
         if (value == defaultValue) {
             throw std::invalid_argument("Error! Unable to find default value!");
         }
-        for (auto &iter: matrix) {
+        for (auto &iter: vectorIndexValue) {
             if(comparator(iter,value)) {
                 return iter;
             }
