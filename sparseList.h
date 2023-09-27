@@ -16,6 +16,12 @@ private:
     std::list<std::pair<T, size_t>> list{};
     size_t capacity{}; //actual list size with default values
     T defaultValue{};
+
+    //custom comparator for sort by index
+    static bool comp(const std::pair<T, size_t> &a, const std::pair<T, size_t> &b) {
+        return a.second < b.second;
+    }
+
 public:
     explicit sparseList(T defaultValue) {
         this->defaultValue = defaultValue;
@@ -113,15 +119,8 @@ public:
         return *(list.end());
     }
 
-    //custom comparator for sort by index
-    static bool comp(const std::pair<T, size_t> &a, const std::pair<T, size_t> &b) {
-        return a.second < b.second;
-    }
-
     friend std::ostream &operator<<(std::ostream &out, std::vector<T> vector);
 };
-
-
 
 
 #endif //LAB1_4_2_SPARSELIST_H
