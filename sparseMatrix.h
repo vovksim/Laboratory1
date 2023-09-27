@@ -28,6 +28,10 @@ public:
 
     sparseMatrix() = default;
 
+    std::tuple<size_t,size_t,A>& end() {
+        return *(matrix.cend());
+    }
+
     void add(size_t row, size_t column, A data) {
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
