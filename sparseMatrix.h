@@ -32,7 +32,7 @@ public:
         return defaultValue;
     }
 
-    std::tuple<size_t, size_t, A> &endSparseMatrix() {
+    const std::tuple<size_t, size_t, A> &endSparseMatrix() {
         return *(matrix.cend());
     }
 
