@@ -16,7 +16,6 @@ private:
     std::list<std::pair<T, size_t>> list{};
     size_t capacity{}; //actual list size with default values
     T defaultValue{};
-
     //custom comparator for sort by index
     static bool comp(const std::pair<T, size_t> &a, const std::pair<T, size_t> &b) {
         return a.second < b.second;
@@ -95,17 +94,17 @@ public:
         return defaultValue;
     }
 
-    std::pair<T, size_t> &find(T value) {
+    const std::pair<T, size_t> &find(T value) {
         if (value == defaultValue) {
             throw std::invalid_argument("Error! Searching default value in sparseList.");
         }
-        for (auto i = list.begin(); i != list.end(); ++i) {
-            if (i->first == value) {
-                return *i;
+        for (const auto& i : list) {
+            if (i.first == value) {
+                return i;
             }
         }
         // not found
-        return *list.end();
+        return *(list.cend());
     }
 
     template<typename Compare>
