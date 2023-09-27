@@ -13,8 +13,8 @@
 template<typename T>
 class sparseList {
 private:
-    std::list<std::pair<T, size_t>> list{};
-    size_t capacity{}; //actual list size with default values
+    std::list<std::pair<T, size_t>> listValueIndex{};
+    size_t capacity{}; //actual listValueIndex size with default values
     T defaultValue{};
 
     //custom comparator for sort by index
@@ -34,22 +34,22 @@ public:
     };
 
     void sortListIndex() {
-        list.sort(comp);
+        listValueIndex.sort(comp);
     }
 
     void sortListValue() {
-        list.sort();
+        listValueIndex.sort();
     }
 
     //method to check find() result
     std::pair<T, size_t> &end() {
-        return *list.end();
+        return *listValueIndex.end();
     }
 
     void showList(std::ostream &out = std::cout) const {
         for (size_t i = 0; i < capacity; i++) {
             bool fromList = false;
-            for (auto j = list.cbegin(); j != list.cend(); j++) {
+            for (auto j = listValueIndex.cbegin(); j != listValueIndex.cend(); j++) {
                 if (j->second == i) {
                     out << "[" << "index: " << j->second << " " << "data: " << j->first << "]\n";
                     fromList = true;
@@ -62,7 +62,7 @@ public:
     }
 
     void showSparseList(std::ostream &out = std::cout) const {
-        for (auto i = list.cbegin(); i != list.cend(); i++) {
+        for (auto i = listValueIndex.cbegin(); i != listValueIndex.cend(); i++) {
             out << "[" << "index: " << i->second << " " << "data: " << i->first << "]\n";
         }
     }
@@ -71,12 +71,12 @@ public:
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
         }
-        for (auto i = list.cbegin(); i != list.cend(); i++) {
+        for (auto i = listValueIndex.cbegin(); i != listValueIndex.cend(); i++) {
             if (i->second == index) {
-                throw std::invalid_argument("Error! Element with this index already in list!");
+                throw std::invalid_argument("Error! Element with this index already in listValueIndex!");
             }
         }
-        list.push_back(std::make_pair(data, index));
+        listValueIndex.push_back(std::make_pair(data, index));
         if (index >= capacity) {
             capacity = index + 1;
         }
@@ -86,7 +86,7 @@ public:
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for (auto &i: list) {
+        for (auto &i: listValueIndex) {
             if (i.second == index) {
                 return i.first;
             }
@@ -99,13 +99,13 @@ public:
         if (value == defaultValue) {
             throw std::invalid_argument("Error! Searching default value in sparseList.");
         }
-        for (const auto &i: list) {
+        for (const auto &i: listValueIndex) {
             if (i.first == value) {
                 return i;
             }
         }
         // not found
-        return *(list.cend());
+        return *(listValueIndex.cend());
     }
 
     template<typename Compare>
@@ -113,13 +113,13 @@ public:
         if(value == defaultValue) {
             throw std :: invalid_argument("Error! Trying to find defaultValue!");
         }
-        for (const auto &i: list) {
+        for (const auto &i: listValueIndex) {
             if (comp(i.first, value)) {
                 return i;
             }
         }
         // not found
-        return *(list.end());
+        return *(listValueIndex.end());
     }
 
     friend std::ostream &operator<<(std::ostream &out, std::vector<T> vector);
