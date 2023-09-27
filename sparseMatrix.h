@@ -5,7 +5,7 @@
 #ifndef LAB1_4_2_SPARSEMATRIX_H
 #define LAB1_4_2_SPARSEMATRIX_H
 
-#include<tuple>
+#include <tuple>
 #include <vector>
 #include <algorithm>
 
@@ -32,7 +32,7 @@ public:
         return defaultValue;
     }
 
-    std::tuple<size_t,size_t,A>& endSparseMatrix() {
+    std::tuple<size_t, size_t, A> &endSparseMatrix() {
         return *(matrix.cend());
     }
 
@@ -105,6 +105,18 @@ public:
         return endSparseMatrix();
     }
 
+    template<typename Comparator>
+    const std::tuple<std::size_t, std::size_t, A> &find_if(A &value, Comparator) {
+        if (value == defaultValue) {
+            throw std::invalid_argument("Error! Unable to find default value!");
+        }
+        for (auto &iter: matrix) {
+            if(comparator(iter,value)) {
+                return iter;
+            }
+        }
+        return endSparseMatrix();
+    }
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
