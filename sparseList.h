@@ -82,17 +82,17 @@ public:
         }
     }
 
-    std::pair<T, size_t> &operator[](size_t index) {
+    T& operator[](size_t index) {
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for (auto i = list.begin(); i != list.end(); ++i) {
-            if (i->second == index) {
-                return *i;
+        for (auto& i : list) {
+            if (i.second == index) {
+                return i.first;
             }
         }
         //if default value
-        return *list.end();
+        return defaultValue;
     }
 
     std::pair<T, size_t> &find(T value) {
