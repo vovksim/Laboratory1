@@ -28,6 +28,10 @@ public:
 
     sparseMatrix() = default;
 
+    A getDefault() {
+        return defaultValue;
+    }
+
     std::tuple<size_t,size_t,A>& endSparseMatrix() {
         return *(matrix.cend());
     }
