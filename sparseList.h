@@ -42,8 +42,8 @@ public:
     }
 
     //method to check find() result
-    std::pair<T, size_t> &end() {
-        return *listValueIndex.end();
+    const std::pair<T, size_t> &end() const{
+        return *(listValueIndex.cend());
     }
 
     void showList(std::ostream &out = std::cout) const {
