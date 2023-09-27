@@ -71,6 +71,18 @@ public:
         std::sort(matrix.begin(), matrix.end(), indexSort);
     }
 
+    A& at(size_t row, size_t column) {
+        if((row+1)*(column+1) >= capacity) {
+            throw std :: invalid_argument("Error! Index went out of bounds!");
+        }
+        for(auto iter : matrix) {
+            if(std :: get<0>(iter) == row && std :: get<1>(iter) == column) {
+                return std::get<2>(iter);
+            }
+        }
+        return defaultValue;
+    }
+
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
