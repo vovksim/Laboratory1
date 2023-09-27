@@ -82,7 +82,7 @@ public:
         }
     }
 
-    T &operator[](size_t index) {
+    T &operator[](const size_t& index) {
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
@@ -95,7 +95,7 @@ public:
         return defaultValue;
     }
 
-    const std::pair<T, size_t> &find(T value) {
+    const std::pair<T, size_t> &find(const T& value) const{
         if (value == defaultValue) {
             throw std::invalid_argument("Error! Searching default value in sparseList.");
         }
@@ -109,7 +109,7 @@ public:
     }
 
     template<typename Compare>
-    const std::pair<T, size_t> &find_if(Compare comp, const T &value) {
+    const std::pair<T, size_t> &find_if(Compare comp, const T &value) const{
         if(value == defaultValue) {
             throw std :: invalid_argument("Error! Trying to find defaultValue!");
         }
