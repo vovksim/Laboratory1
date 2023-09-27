@@ -118,7 +118,7 @@ public:
             throw std :: invalid_argument("Error! Trying to find defaultValue!");
         }
         for (const auto &i: listValueIndex) {
-            if (comp(i.first, value)) {
+            if (comp(i, value)) {
                 return i;
             }
         }
