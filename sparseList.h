@@ -16,6 +16,7 @@ private:
     std::list<std::pair<T, size_t>> list{};
     size_t capacity{}; //actual list size with default values
     T defaultValue{};
+
     //custom comparator for sort by index
     static bool comp(const std::pair<T, size_t> &a, const std::pair<T, size_t> &b) {
         return a.second < b.second;
@@ -81,11 +82,11 @@ public:
         }
     }
 
-    T& operator[](size_t index) {
+    T &operator[](size_t index) {
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
-        for (auto& i : list) {
+        for (auto &i: list) {
             if (i.second == index) {
                 return i.first;
             }
@@ -98,7 +99,7 @@ public:
         if (value == defaultValue) {
             throw std::invalid_argument("Error! Searching default value in sparseList.");
         }
-        for (const auto& i : list) {
+        for (const auto &i: list) {
             if (i.first == value) {
                 return i;
             }
@@ -108,13 +109,16 @@ public:
     }
 
     template<typename Compare>
-    std::pair<T, size_t> &find_if(Compare comp, const T &value) {
-        for (auto it = list.begin(); it != list.end(); ++it) {
-            if (comp(it->first, value)) {
-                return *(it);
+    const std::pair<T, size_t> &find_if(Compare comp, const T &value) {
+        if(value == defaultValue) {
+            throw std :: invalid_argument("Error! Trying to find defaultValue!");
+        }
+        for (const auto &i: list) {
+            if (comp(i.first, value)) {
+                return i;
             }
         }
-        // If the value is not found, return the end iterator.
+        // not found
         return *(list.end());
     }
 
