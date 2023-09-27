@@ -21,7 +21,7 @@ class sparseMatrix {
     }
 
 public:
-    sparseMatrix(A defaultValue) {
+    explicit sparseMatrix(A defaultValue) {
         this->defaultValue = defaultValue;
     }
 
