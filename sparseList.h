@@ -105,7 +105,7 @@ public:
             }
         }
         // not found
-        return *(listValueIndex.cend());
+        return end();
     }
 
     template<typename Compare>
@@ -119,7 +119,7 @@ public:
             }
         }
         // not found
-        return *(listValueIndex.end());
+        return end();
     }
 
     friend std::ostream &operator<<(std::ostream &out, std::vector<T> vector);
