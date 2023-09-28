@@ -119,11 +119,20 @@ public:
             throw std::invalid_argument("Error! Unable to find default value!");
         }
         for (auto &iter: vectorIndexValue) {
-            if(comparator(iter,value)) {
+            if (comparator(iter, value)) {
                 return iter;
             }
         }
         return endSparseMatrix();
+    }
+
+    void transpose() {
+        if (columnQuantity != rowQuantity) {
+            std::swap(rowQuantity, columnQuantity);
+        }
+        for (auto &iter: vectorIndexValue) {
+            std::swap(std::get<0>(iter), std::get<1>(iter));
+        }
     }
 };
 
