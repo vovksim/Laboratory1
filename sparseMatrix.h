@@ -149,7 +149,6 @@ public:
             throw std::invalid_argument("Error! Can't sum matrices of different size!");
         }
         sparseMatrix<A> result;
-        std::cout << "\nLhs.rows : " << rhs.getRowQuantity() << " ;  " << "cols : " << rhs.getColumnQuantity() << "\n";
         for (std::size_t i = 0; i < rhs.getRowQuantity(); i++) {
             for (std::size_t j = 0; j < rhs.getColumnQuantity(); j++) {
                 for (auto &iter: this->vectorIndexValue) {
@@ -163,6 +162,9 @@ public:
         return result;
     }
 
+    void operator+=(sparseMatrix<A> &rhs) {
+        *this = *this + rhs;
+    }
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
