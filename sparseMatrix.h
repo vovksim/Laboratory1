@@ -142,6 +142,27 @@ public:
             std::swap(std::get<0>(iter), std::get<1>(iter));
         }
     }
+
+
+    sparseMatrix<A> operator+(sparseMatrix<A> &rhs) {
+        if (this->columnQuantity != rhs.columnQuantity || this->rowQuantity != rhs.rowQuantity) {
+            throw std::invalid_argument("Error! Can't sum matrices of different size!");
+        }
+        sparseMatrix<A> result;
+        std::cout << "\nLhs.rows : " << rhs.getRowQuantity() << " ;  " << "cols : " << rhs.getColumnQuantity() << "\n";
+        for (std::size_t i = 0; i < rhs.getRowQuantity(); i++) {
+            for (std::size_t j = 0; j < rhs.getColumnQuantity(); j++) {
+                for (auto &iter: this->vectorIndexValue) {
+                    if (std::get<0>(iter) == i && std::get<1>(iter) == j) {
+                        result.add(i, j, std::get<2>(iter) + rhs.at(i, j));
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
