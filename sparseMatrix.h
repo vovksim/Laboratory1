@@ -15,6 +15,7 @@ class sparseMatrix {
     std::vector<std::tuple<std::size_t, std::size_t, A>> vectorIndexValue{};
     A defaultValue{};
     std::size_t rowQuantity{};
+    std::size_t columnQuantity{};
 
     static bool
     indexSort(const std::tuple<std::size_t, std::size_t, A> &a, const std::tuple<std::size_t, std::size_t, A> &b) {
@@ -48,13 +49,20 @@ public:
         vectorIndexValue.push_back(std::make_tuple(row, column, data));
         if ((row + 1) * (column + 1) >= capacity) {
             capacity = (row + 1) * (column + 1);
-            rowQuantity = row + 1;
+            if (row + 1 > rowQuantity && columnQuantity < column + 1) {
+                rowQuantity = row + 1;
+                columnQuantity = column + 1;
+            } else if (columnQuantity < column + 1) {
+                columnQuantity = column + 1;
+            } else if (rowQuantity < row + 1) {
+                rowQuantity = row + 1;
+            }
         }
     }
 
     void showMatrix(std::ostream &out = std::cout) {
         for (std::size_t i = 0; i < rowQuantity; i++) {
-            for (std::size_t j = 0; j < capacity / rowQuantity; j++) {
+            for (std::size_t j = 0; j < columnQuantity; j++) {
                 bool isIndexed = false;
                 for (auto iter: vectorIndexValue) {
                     if (std::get<0>(iter) == i && std::get<1>(iter) == j) {
