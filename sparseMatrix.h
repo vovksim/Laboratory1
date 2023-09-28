@@ -27,6 +27,14 @@ public:
         this->defaultValue = defaultValue;
     }
 
+    std::size_t getRowQuantity() {
+        return rowQuantity;
+    }
+
+    std::size_t getColumnQuantity() {
+        return columnQuantity;
+    }
+
     sparseMatrix() = default;
 
     A getDefault() {
