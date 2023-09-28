@@ -98,7 +98,7 @@ public:
     }
 
     A &at(size_t row, size_t column) {
-        if ((row + 1) * (column + 1) >= capacity) {
+        if ((row + 1) * (column + 1) > capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
         for (auto iter: vectorIndexValue) {
