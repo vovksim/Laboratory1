@@ -184,6 +184,16 @@ public:
         return capacity == 0;
     }
 
+    sparseMatrix<A> operator*(sparseMatrix<A>& rhs) {
+        if(this->isEmpty() || rhs.isEmpty()) {
+            throw std::invalid_argument("Error! Matrix is empty!");
+        }
+        if(this->columnQuantity!=rhs.rowQuantity) {
+            throw std::invalid_argument("Error! Matrix1colQuantity!= Matrix2rowQuantity.");
+        }
+
+
+    }
 
 };
 
