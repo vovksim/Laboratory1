@@ -22,6 +22,20 @@ class sparseMatrix {
         return (std::get<0>(a) < std::get<0>(b) && std::get<1>(a) < std::get<1>(b));
     }
 
+    void multiplyOnVectorColumn(sparseMatrix<A> &vector) {
+        if (vector.rowQuantity == this->columnQuantity && vector.columnQuantity == 1) {
+            sparseMatrix<A> result;
+            for (std::size_t i = 0; i < this->rowQuantity; i++) {
+                A tempCoordinate{};
+                for (std::size_t j = 0; j < this->columnQuantity; j++) {
+                    tempCoordinate += this->at(i, j) * vector.at(j, 0);
+                }
+                result.add(i, 0, tempCoordinate);
+            }
+            *this = result;
+        }
+    }
+
 public:
     explicit sparseMatrix(A defaultValue) {
         this->defaultValue = defaultValue;
@@ -170,24 +184,7 @@ public:
         return capacity == 0;
     }
 
-    void multiplyOnVector(sparseMatrix<A> &vector) {
-        if (this->isEmpty() || vector.isEmpty()) {
-            throw std::invalid_argument("Error! Matrix is empty!");
-        }
-        if (vector.rowQuantity == this->columnQuantity && vector.columnQuantity == 1) {
-            sparseMatrix<A> result;
-            for (std::size_t i = 0; i < this->rowQuantity; i++) {
-                A tempCoordinate{};
-                for (std::size_t j = 0; j < this->columnQuantity; j++) {
-                    tempCoordinate += this->at(i, j) * vector.at(j, 0);
-                }
-                result.add(i, 0, tempCoordinate);
-            }
-            *this = result;
-        } else {
-            throw std::invalid_argument("Error! Cannot multiply if rows1!=cols2!");
-        }
-    }
+
 };
 
 #endif //LAB1_4_2_SPARSEMATRIX_H
