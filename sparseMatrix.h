@@ -69,16 +69,14 @@ public:
             }
         }
         vectorIndexValue.push_back(std::make_tuple(row, column, data));
-        if ((row + 1) * (column + 1) >= capacity) {
-            capacity = (row + 1) * (column + 1);
-            if (row + 1 > rowQuantity && columnQuantity < column + 1) {
-                rowQuantity = row + 1;
-                columnQuantity = column + 1;
-            } else if (columnQuantity < column + 1) {
-                columnQuantity = column + 1;
-            } else if (rowQuantity < row + 1) {
-                rowQuantity = row + 1;
-            }
+        if (columnQuantity <= column + 1) {
+            columnQuantity = column + 1;
+        }
+        if (rowQuantity <= row + 1) {
+            rowQuantity = row + 1;
+        }
+        if (rowQuantity * columnQuantity >= capacity) {
+            capacity = rowQuantity * columnQuantity;
         }
     }
 
@@ -184,14 +182,14 @@ public:
         return capacity == 0;
     }
 
-    sparseMatrix<A> operator*(sparseMatrix<A>& rhs) {
-        if(this->isEmpty() || rhs.isEmpty()) {
+    //not by reference because of sort
+    sparseMatrix<A> operator*(sparseMatrix<A> rhs) {
+        if (this->isEmpty() || rhs.isEmpty()) {
             throw std::invalid_argument("Error! Matrix is empty!");
         }
-        if(this->columnQuantity!=rhs.rowQuantity) {
+        if (this->columnQuantity != rhs.rowQuantity) {
             throw std::invalid_argument("Error! Matrix1colQuantity!= Matrix2rowQuantity.");
         }
-
 
     }
 
