@@ -36,6 +36,38 @@ class sparseMatrix {
         }
     }
 
+    void getRow(std::size_t rowNumber) {
+        sparseMatrix<A> tempRowElementCollector;
+        for (auto &iter: vectorIndexValue) {
+            if (std::get<0>(iter) == rowNumber) {
+                tempRowElementCollector.add(rowNumber, std::get<1>(iter), std::get<2>(iter));
+            }
+        }
+        tempRowElementCollector.sortIndex();
+        return tempRowElementCollector;
+    }
+
+    void multiplyRow(const sparseMatrix<A> &rowLhs, const sparseMatrix<A> &rowRhs, sparseMatrix<A> &result) {
+        A data{};
+        if (rowLhs.capacity <= 0 || rowRhs.capacity <= 0) {
+            return;
+        }
+        //setting new pos in result
+        std::size_t rowAddToResult = (rowLhs.rowQuantity) - 1;
+        std::size_t colAddToResult = (rowRhs.rowQuantity) - 1;
+        //going through one row of both matrices
+        for (auto &i: rowLhs.vectorIndexValue) {
+            for (auto &j: rowRhs.vectorIndexValue) {
+                if (std::get<1>(j) == std::get<1>(j)) {
+                    data = std::get<2>(i) * std::get<2>(j);
+                }
+            }
+        }
+        if (data != defaultValue) {
+            result.add(rowAddToResult, columnQuantity, data);
+        }
+    }
+
 public:
     explicit sparseMatrix(A defaultValue) {
         this->defaultValue = defaultValue;
@@ -182,7 +214,7 @@ public:
         return capacity == 0;
     }
 
-    //not by reference because of sort
+    //not by reference because of sort and transpose
     sparseMatrix<A> operator*(sparseMatrix<A> rhs) {
         if (this->isEmpty() || rhs.isEmpty()) {
             throw std::invalid_argument("Error! Matrix is empty!");
@@ -190,7 +222,6 @@ public:
         if (this->columnQuantity != rhs.rowQuantity) {
             throw std::invalid_argument("Error! Matrix1colQuantity!= Matrix2rowQuantity.");
         }
-
     }
 
 };
