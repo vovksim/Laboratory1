@@ -36,7 +36,7 @@ class sparseMatrix {
         }
     }
 
-    void getRow(std::size_t rowNumber) {
+    sparseMatrix<A> getRow(std::size_t rowNumber) {
         sparseMatrix<A> tempRowElementCollector;
         for (auto &iter: vectorIndexValue) {
             if (std::get<0>(iter) == rowNumber) {
@@ -58,13 +58,13 @@ class sparseMatrix {
         //going through one row of both matrices
         for (auto &i: rowLhs.vectorIndexValue) {
             for (auto &j: rowRhs.vectorIndexValue) {
-                if (std::get<1>(j) == std::get<1>(j)) {
-                    data = std::get<2>(i) * std::get<2>(j);
+                if (std::get<1>(i) == std::get<1>(j)) {
+                    data += std::get<2>(i) * std::get<2>(j);
                 }
             }
         }
         if (data != defaultValue) {
-            result.add(rowAddToResult, columnQuantity, data);
+            result.add(rowAddToResult, colAddToResult, data);
         }
     }
 
