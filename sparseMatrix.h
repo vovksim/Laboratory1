@@ -22,20 +22,6 @@ class sparseMatrix {
         return (std::get<0>(a) < std::get<0>(b) && std::get<1>(a) < std::get<1>(b));
     }
 
-    void multiplyOnVectorColumn(sparseMatrix<A> &vector) {
-        if (vector.rowQuantity == this->columnQuantity && vector.columnQuantity == 1) {
-            sparseMatrix<A> result;
-            for (std::size_t i = 0; i < this->rowQuantity; i++) {
-                A tempCoordinate{};
-                for (std::size_t j = 0; j < this->columnQuantity; j++) {
-                    tempCoordinate += this->at(i, j) * vector.at(j, 0);
-                }
-                result.add(i, 0, tempCoordinate);
-            }
-            *this = result;
-        }
-    }
-
     sparseMatrix<A> getRow(std::size_t rowNumber) {
         sparseMatrix<A> tempRowElementCollector;
         for (auto &iter: vectorIndexValue) {
@@ -222,6 +208,16 @@ public:
         if (this->columnQuantity != rhs.rowQuantity) {
             throw std::invalid_argument("Error! Matrix1colQuantity!= Matrix2rowQuantity.");
         }
+        sparseMatrix<A> result;
+        rhs.transpose();
+        rhs.sortIndex();
+        this->sortIndex();
+        for (std::size_t i = 0; i < this->rowQuantity; i++) {
+            for (std::size_t j = 0; j < rhs.rowQuantity; j++) {
+                multiplyRow(this->getRow(i), rhs.getRow(j), result);
+            }
+        }
+        return result;
     }
 
 };
