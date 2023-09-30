@@ -67,6 +67,14 @@ public:
         return columnQuantity;
     }
 
+    std::size_t setColumnQuantity(std::size_t value) {
+        columnQuantity = value;
+    }
+
+    std::size_t setRowQuantity(std::size_t value) {
+        rowQuantity = value;
+    }
+
     sparseMatrix() = default;
 
     A getDefault() {
