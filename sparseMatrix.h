@@ -113,7 +113,7 @@ public:
 
     sparseMatrix() = default;
 
-    A getDefault() {
+    A getDefaultValue() {
         return defaultValue;
     }
 
