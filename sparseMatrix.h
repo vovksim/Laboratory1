@@ -123,7 +123,7 @@ public:
 
     void add(size_t row, size_t column, A data) {
         if (data == defaultValue) {
-            throw std::invalid_argument("Error! Adding default value type to sparseList!");
+            throw std::logic_error("Error! Adding default value type to sparseList!");
         }
         for (auto iter: vectorIndexValue) {
             if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
@@ -173,7 +173,7 @@ public:
 
     A &at(size_t row, size_t column) {
         if (row >= rowQuantity || column >= columnQuantity) {
-            throw std::invalid_argument("Error! Index went out of bounds!");
+            throw std::out_of_range("Error! Index went out of bounds!");
         }
         for (auto iter: vectorIndexValue) {
             if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
@@ -185,7 +185,7 @@ public:
 
     const std::tuple<std::size_t, std::size_t, A> &find(A &value) {
         if (value == defaultValue) {
-            throw std::invalid_argument("Error! Unable to find default value!");
+            throw std::logic_error("Error! Unable to find default value!");
         }
         for (const auto &iter: vectorIndexValue) {
             if (std::get<2>(iter) == value) {
@@ -198,7 +198,7 @@ public:
     template<typename Comparator>
     const std::tuple<std::size_t, std::size_t, A> &find_if(A &value, Comparator) {
         if (value == defaultValue) {
-            throw std::invalid_argument("Error! Unable to find default value!");
+            throw std::logic_error("Error! Unable to find default value!");
         }
         for (auto &iter: vectorIndexValue) {
             if (comparator(iter, value)) {
@@ -247,7 +247,7 @@ public:
     //not by reference because of sort and transpose
     sparseMatrix<A> operator*(sparseMatrix<A> rhs) {
         if (this->isEmpty() || rhs.isEmpty()) {
-            throw std::invalid_argument("Error! Matrix is empty!");
+            throw std::length_error("Error! Matrix is empty!");
         }
         if (this->columnQuantity != rhs.rowQuantity) {
             throw std::invalid_argument("Error! Matrix1colQuantity!= Matrix2rowQuantity.");
