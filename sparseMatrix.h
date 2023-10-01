@@ -264,14 +264,9 @@ public:
         return result;
     }
 
-    bool operator==(sparseMatrix<A> &rhs) {
-        if (this->columnQuantity != rhs.columnQuantity || this->rowQuantity != rhs.rowQuantity) {
+    bool operator==(const sparseMatrix<A> &rhs) const {
+        if(this->vectorIndexValue != rhs.vectorIndexValue) {
             return false;
-        }
-        for (std::size_t i = 0; i < this->vectorIndexValue.size(); i++) {
-            if (this->vectorIndexValue[i] != rhs.vectorIndexValue[i]) {
-                return false;
-            }
         }
         return true;
     }
