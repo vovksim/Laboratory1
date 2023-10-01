@@ -8,6 +8,7 @@
 #include <tuple>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 template<typename A>
 class sparseMatrix {
@@ -59,10 +60,26 @@ public:
         this->defaultValue = defaultValue;
     }
 
+    explicit sparseMatrix(std::vector<std::pair<std::pair<std::size_t, std::size_t>, A>> input) {
+        std::size_t columnTempQuantity = 0, rowTempQuantity = 0;
+        for (auto &iter: input) {
+            if (rowTempQuantity < std::get<0>(iter)) {
+                rowTempQuantity = std::get<0>(iter);
+            }
+            if (columnTempQuantity < std::get<1>(iter)) {
+                columnTempQuantity = std::get<1>(iter);
+            }
+            vectorIndexValue.push_back(iter);
+        }
+        columnQuantity = columnTempQuantity;
+        rowQuantity = rowTempQuantity;
+        capacity = rowQuantity * columnQuantity;
+    }
+
     explicit sparseMatrix(std::vector<std::vector<A>> input) {
         std::size_t checkSize = input[0].size();
-        for(auto& iter : input) {
-            if(iter.size()!=checkSize) {
+        for (auto &iter: input) {
+            if (iter.size() != checkSize) {
                 throw std::invalid_argument("Error! It's not matrix!");
             }
         }
@@ -73,9 +90,9 @@ public:
                 }
             }
         }
-        rowQuantity=input.size();
-        columnQuantity=checkSize;
-        capacity=rowQuantity*columnQuantity;
+        rowQuantity = input.size();
+        columnQuantity = checkSize;
+        capacity = rowQuantity * columnQuantity;
     }
 
     std::size_t getRowQuantity() {
@@ -86,11 +103,11 @@ public:
         return columnQuantity;
     }
 
-    std::size_t setColumnQuantity(std::size_t value) {
+    void setColumnQuantity(std::size_t value) {
         columnQuantity = value;
     }
 
-    std::size_t setRowQuantity(std::size_t value) {
+    void setRowQuantity(std::size_t value) {
         rowQuantity = value;
     }
 
@@ -245,6 +262,18 @@ public:
             }
         }
         return result;
+    }
+
+    bool operator==(sparseMatrix<A> &rhs) {
+        if (this->columnQuantity != rhs.columnQuantity || this->rowQuantity != rhs.rowQuantity) {
+            return false;
+        }
+        for (std::size_t i = 0; i < this->vectorIndexValue.size(); i++) {
+            if (this->vectorIndexValue[i] != rhs.vectorIndexValue[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
 };
