@@ -69,7 +69,11 @@ public:
             if (columnTempQuantity < std::get<1>(iter)) {
                 columnTempQuantity = std::get<1>(iter);
             }
-            vectorIndexValue.push_back(iter);
+            if (std::get<2>(input) != defaultValue) {
+                vectorIndexValue.push_back(iter);
+            } else {
+                throw std::logic_error("Error! DefaultValue cannot be indexed!");
+            }
         }
         columnQuantity = columnTempQuantity;
         rowQuantity = rowTempQuantity;
@@ -125,8 +129,8 @@ public:
         if (data == defaultValue) {
             throw std::logic_error("Error! Adding default value type to sparseList!");
         }
-        if(isAlreadyIndexed(row,column)) {
-                throw std::invalid_argument("Error! Element with this index already found!");
+        if (isAlreadyIndexed(row, column)) {
+            throw std::invalid_argument("Error! Element with this index already found!");
         }
         vectorIndexValue.push_back(std::make_tuple(row, column, data));
         if (columnQuantity <= column + 1) {
@@ -270,8 +274,8 @@ public:
     }
 
     bool isAlreadyIndexed(std::size_t row, std::size_t column) {
-        for(auto &iter : vectorIndexValue) {
-            if(std::get<0>(iter) == row && std::get<1>(iter) == column) {
+        for (auto &iter: vectorIndexValue) {
+            if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 return true;
             }
         }
