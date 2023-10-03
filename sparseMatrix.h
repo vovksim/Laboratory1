@@ -125,10 +125,8 @@ public:
         if (data == defaultValue) {
             throw std::logic_error("Error! Adding default value type to sparseList!");
         }
-        for (auto iter: vectorIndexValue) {
-            if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
+        if(isAlreadyIndexed(row,column)) {
                 throw std::invalid_argument("Error! Element with this index already found!");
-            }
         }
         vectorIndexValue.push_back(std::make_tuple(row, column, data));
         if (columnQuantity <= column + 1) {
