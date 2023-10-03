@@ -80,6 +80,7 @@ public:
         capacity = rowQuantity * columnQuantity;
     }
 
+    //let to give default values because matrix will be sparsed after input
     explicit sparseMatrix(std::vector<std::vector<A>> input) {
         std::size_t checkSize = input[0].size();
         for (auto &iter: input) {
