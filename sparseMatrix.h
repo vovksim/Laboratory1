@@ -265,11 +265,21 @@ public:
     }
 
     bool operator==(const sparseMatrix<A> &rhs) const {
-        if(this->vectorIndexValue != rhs.vectorIndexValue) {
+        if (this->vectorIndexValue != rhs.vectorIndexValue) {
             return false;
         }
         return true;
     }
+
+    bool isAlreadyIndexed(std::size_t row, std::size_t column) {
+        for(auto &iter : vectorIndexValue) {
+            if(std::get<0>(iter) == row && std::get<1>(iter) == column) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 };
 
