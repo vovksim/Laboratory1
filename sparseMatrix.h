@@ -55,6 +55,12 @@ class sparseMatrix {
         }
     }
 
+    void changeSizeParameters(std::size_t newRowSize, std::size_t newColumnSize) {
+        rowQuantity = newRowSize;
+        columnQuantity = newColumnSize;
+        capacity = rowQuantity * columnQuantity;
+    }
+
 public:
     explicit sparseMatrix(A defaultValue) {
         this->defaultValue = defaultValue;
