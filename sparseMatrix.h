@@ -81,17 +81,15 @@ public:
                 throw std::logic_error("Error! DefaultValue cannot be indexed!");
             }
         }
-        columnQuantity = columnTempQuantity;
-        rowQuantity = rowTempQuantity;
-        capacity = rowQuantity * columnQuantity;
+        changeSizeParameters(rowTempQuantity,columnTempQuantity);
         sortIndex(); //sparse matrix is stored sorted by index
     }
 
     //let to give default values because matrix will be sparsed after input
     explicit sparseMatrix(std::vector<std::vector<A>> input) {
-        std::size_t checkSize = input[0].size();
+        std::size_t checkColumnQuantity = input[0].size();
         for (std::size_t i = 0; i < input.size(); i++) {
-            if (input[i].size() != checkSize) {
+            if (input[i].size() != checkColumnQuantity) {
                 throw std::invalid_argument("Error! It's not matrix!");
             }
             for (std::size_t j = 0; j < input[i].size(); j++) {
@@ -100,9 +98,7 @@ public:
                 }
             }
         }
-        rowQuantity = input.size();
-        columnQuantity = checkSize;
-        capacity = rowQuantity * columnQuantity;
+        changeSizeParameters(input.size(), checkColumnQuantity);
         sortIndex(); //sparse matrix is stored sorted by index
     }
 
