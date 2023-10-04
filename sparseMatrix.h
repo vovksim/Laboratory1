@@ -18,8 +18,8 @@ class sparseMatrix {
     std::size_t rowQuantity{};
     std::size_t columnQuantity{};
 
-    static bool
-    indexSort(const std::tuple<std::size_t, std::size_t, A> &a, const std::tuple<std::size_t, std::size_t, A> &b) {
+    static bool indexSortComparator(const std::tuple<std::size_t, std::size_t, A> &a,
+                                    const std::tuple<std::size_t, std::size_t, A> &b) {
         return (std::get<0>(a) < std::get<0>(b) && std::get<1>(a) < std::get<1>(b));
     }
 
@@ -78,6 +78,7 @@ public:
         columnQuantity = columnTempQuantity;
         rowQuantity = rowTempQuantity;
         capacity = rowQuantity * columnQuantity;
+        sortIndex(); //sparse matrix is stored sorted by index
     }
 
     //let to give default values because matrix will be sparsed after input
@@ -98,6 +99,7 @@ public:
         rowQuantity = input.size();
         columnQuantity = checkSize;
         capacity = rowQuantity * columnQuantity;
+        sortIndex(); //sparse matrix is stored sorted by index
     }
 
     std::size_t getRowQuantity() {
@@ -143,6 +145,7 @@ public:
         if (rowQuantity * columnQuantity >= capacity) {
             capacity = rowQuantity * columnQuantity;
         }
+        sortIndex(); //sparse matrix is stored sorted by index
     }
 
     void showMatrix(std::ostream &out = std::cout) {
@@ -171,7 +174,7 @@ public:
     }
 
     void sortIndex() {
-        std::sort(vectorIndexValue.begin(), vectorIndexValue.end(), indexSort);
+        std::sort(vectorIndexValue.begin(), vectorIndexValue.end(), indexSortComparator);
     }
 
     A &at(size_t row, size_t column) {
