@@ -84,12 +84,10 @@ public:
     //let to give default values because matrix will be sparsed after input
     explicit sparseMatrix(std::vector<std::vector<A>> input) {
         std::size_t checkSize = input[0].size();
-        for (auto &iter: input) {
-            if (iter.size() != checkSize) {
+        for (std::size_t i = 0; i < input.size(); i++) {
+            if (input[i].size() != checkSize) {
                 throw std::invalid_argument("Error! It's not matrix!");
             }
-        }
-        for (std::size_t i = 0; i < input.size(); i++) {
             for (std::size_t j = 0; j < input[i].size(); j++) {
                 if (input[i][j] != defaultValue) {
                     vectorIndexValue.push_back(std::make_tuple(i, j, input[i][j]));
