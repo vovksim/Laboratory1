@@ -151,18 +151,9 @@ public:
     void showMatrix(std::ostream &out = std::cout) {
         for (std::size_t i = 0; i < rowQuantity; i++) {
             for (std::size_t j = 0; j < columnQuantity; j++) {
-                bool isIndexed = false;
-                for (auto iter: vectorIndexValue) {
-                    if (std::get<0>(iter) == i && std::get<1>(iter) == j) {
-                        out << std::get<2>(iter) << " ";
-                        isIndexed = true;
-                    }
-                }
-                if (!isIndexed) {
-                    out << defaultValue << " ";
-                }
+                out << this->at(i, j) << " ";
             }
-            std::cout << "\n";
+            out << "\n";
         }
     }
 
