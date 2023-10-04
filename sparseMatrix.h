@@ -229,14 +229,14 @@ public:
             throw std::invalid_argument("Error! Can't sum matrices of different size!");
         }
         sparseMatrix<A> result;
-        for (std::size_t i = 0; i < rhs.getRowQuantity(); i++) {
-            for (std::size_t j = 0; j < rhs.getColumnQuantity(); j++) {
-                for (auto &iter: this->vectorIndexValue) {
-                    if (std::get<0>(iter) == i && std::get<1>(iter) == j) {
-                        result.add(i, j, std::get<2>(iter) + rhs.at(i, j));
-                        break;
-                    }
-                }
+        result.setColumnQuantity(rhs.columnQuantity);
+        result.setRowQuantity(rhs.rowQuantity);
+        for (auto &i: this->vectorIndexValue) {
+            size_t row = std::get<0>(i);
+            size_t column = std::get<1>(i);
+            A data = std::get<2>(i) + rhs.at(row, column);
+            if (data != defaultValue) {
+                result.add(row, column, data);
             }
         }
         return result;
@@ -250,7 +250,7 @@ public:
         return capacity == 0;
     }
 
-    sparseMatrix<A> operator*(sparseMatrix<A>& rhs) {
+    sparseMatrix<A> operator*(sparseMatrix<A> &rhs) {
         if (this->isEmpty() || rhs.isEmpty()) {
             throw std::length_error("Error! Matrix is empty!");
         }
