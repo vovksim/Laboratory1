@@ -250,8 +250,7 @@ public:
         return capacity == 0;
     }
 
-    //not by reference because of sort and transpose
-    sparseMatrix<A> operator*(sparseMatrix<A> rhs) {
+    sparseMatrix<A> operator*(sparseMatrix<A>& rhs) {
         if (this->isEmpty() || rhs.isEmpty()) {
             throw std::length_error("Error! Matrix is empty!");
         }
@@ -260,8 +259,6 @@ public:
         }
         sparseMatrix<A> result;
         rhs.transpose();
-        rhs.sortIndex();
-        this->sortIndex();
         for (std::size_t i = 0; i < this->rowQuantity; i++) {
             for (std::size_t j = 0; j < rhs.rowQuantity; j++) {
                 multiplyRow(this->getRow(i), rhs.getRow(j), result);
