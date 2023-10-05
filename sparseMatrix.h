@@ -172,7 +172,7 @@ public:
         if (row >= rowQuantity || column >= columnQuantity) {
             throw std::out_of_range("Error! Index went out of bounds!");
         }
-        for (auto iter: vectorIndexValue) {
+        for (auto& iter: vectorIndexValue) {
             if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 return std::get<2>(iter);
             }
