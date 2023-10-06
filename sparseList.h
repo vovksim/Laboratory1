@@ -50,7 +50,7 @@ public:
         return *(listValueIndex.cend());
     }
 
-    void showList(std::ostream &out = std::cout) const {
+    void print(std::ostream &out = std::cout) const {
         for (size_t i = 0; i < capacity; i++) {
             bool fromList = false;
             for (auto j = listValueIndex.cbegin(); j != listValueIndex.cend(); j++) {
@@ -65,7 +65,7 @@ public:
         }
     }
 
-    void showSparseList(std::ostream &out = std::cout) const {
+    void printSparsed(std::ostream &out = std::cout) const {
         for (auto i = listValueIndex.cbegin(); i != listValueIndex.cend(); i++) {
             out << "[" << "index: " << i->second << " " << "data: " << i->first << "]\n";
         }
