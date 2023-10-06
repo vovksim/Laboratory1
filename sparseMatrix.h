@@ -148,7 +148,7 @@ public:
         sortIndex(); //sparse matrix is stored sorted by index
     }
 
-    void showMatrix(std::ostream &out = std::cout) {
+    void print(std::ostream &out = std::cout) {
         for (std::size_t i = 0; i < rowQuantity; i++) {
             for (std::size_t j = 0; j < columnQuantity; j++) {
                 out << this->at(i, j) << " ";
@@ -157,7 +157,7 @@ public:
         }
     }
 
-    void showSparseMatrix(std::ostream &out = std::cout) {
+    void printSparsed(std::ostream &out = std::cout) {
         for (auto iter: vectorIndexValue) {
             out << "index:" << "(" << std::get<0>(iter) << "," << std::get<1>(iter) << ")" << " data: "
                 << std::get<2>(iter) << "\n";
