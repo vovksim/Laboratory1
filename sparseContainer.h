@@ -8,6 +8,7 @@
 
 template<typename A>
 class sparseContainer {
+public:
     virtual A &at(std::size_t, std::size_t) = 0;
 
     virtual void print(std::ostream &out = std::cout) = 0;
