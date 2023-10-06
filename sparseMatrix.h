@@ -8,10 +8,10 @@
 #include <tuple>
 #include <vector>
 #include <algorithm>
-#include <iostream>
+
 
 template<typename A>
-class sparseMatrix {
+class sparseMatrix : public sparseContainer<A> {
     std::size_t capacity{};
     std::vector<std::tuple<std::size_t, std::size_t, A>> vectorIndexValue{};
     A defaultValue{};
@@ -81,7 +81,7 @@ public:
                 throw std::logic_error("Error! DefaultValue cannot be indexed!");
             }
         }
-        changeSizeParameters(rowTempQuantity,columnTempQuantity);
+        changeSizeParameters(rowTempQuantity, columnTempQuantity);
         sortIndex(); //sparse matrix is stored sorted by index
     }
 
@@ -128,7 +128,7 @@ public:
         return *(vectorIndexValue.cend());
     }
 
-    void add(size_t row, size_t column, A data) {
+    void add(size_t row, size_t column, A data) override {
         if (data == defaultValue) {
             throw std::logic_error("Error! Adding default value type to sparseList!");
         }
@@ -148,7 +148,7 @@ public:
         sortIndex(); //sparse matrix is stored sorted by index
     }
 
-    void print(std::ostream &out = std::cout) {
+    void print(std::ostream &out = std::cout) override {
         for (std::size_t i = 0; i < rowQuantity; i++) {
             for (std::size_t j = 0; j < columnQuantity; j++) {
                 out << this->at(i, j) << " ";
@@ -157,7 +157,7 @@ public:
         }
     }
 
-    void printSparsed(std::ostream &out = std::cout) {
+    void printSparsed(std::ostream &out = std::cout) override {
         for (auto iter: vectorIndexValue) {
             out << "index:" << "(" << std::get<0>(iter) << "," << std::get<1>(iter) << ")" << " data: "
                 << std::get<2>(iter) << "\n";
@@ -168,11 +168,11 @@ public:
         std::sort(vectorIndexValue.begin(), vectorIndexValue.end(), indexSortComparator);
     }
 
-    A &at(size_t row, size_t column) {
+    A &at(size_t row, size_t column) override {
         if (row >= rowQuantity || column >= columnQuantity) {
             throw std::out_of_range("Error! Index went out of bounds!");
         }
-        for (auto& iter: vectorIndexValue) {
+        for (auto &iter: vectorIndexValue) {
             if (std::get<0>(iter) == row && std::get<1>(iter) == column) {
                 return std::get<2>(iter);
             }
