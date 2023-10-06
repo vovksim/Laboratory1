@@ -5,13 +5,13 @@
 #ifndef LAB1_4_2_SPARSELIST_H
 #define LAB1_4_2_SPARSELIST_H
 
-#include <iostream>
 #include <list>
 #include <vector>
 #include "helper.h"
+#include "sparseContainer.h"
 
 template<typename T>
-class sparseList {
+class sparseList : public sparseContainer<T> {
 private:
     std::list<std::pair<T, size_t>> listValueIndex{};
     size_t capacity{}; //actual listValueIndex size with default values
@@ -50,7 +50,7 @@ public:
         return *(listValueIndex.cend());
     }
 
-    void print(std::ostream &out = std::cout) const {
+    void print(std::ostream &out = std::cout) const override {
         for (size_t i = 0; i < capacity; i++) {
             bool fromList = false;
             for (auto j = listValueIndex.cbegin(); j != listValueIndex.cend(); j++) {
@@ -65,13 +65,13 @@ public:
         }
     }
 
-    void printSparsed(std::ostream &out = std::cout) const {
+    void printSparsed(std::ostream &out = std::cout) const override {
         for (auto i = listValueIndex.cbegin(); i != listValueIndex.cend(); i++) {
             out << "[" << "index: " << i->second << " " << "data: " << i->first << "]\n";
         }
     }
 
-    void add(T data, size_t index) {
+    void add(T data, size_t index) override{
         if (data == defaultValue) {
             throw std::invalid_argument("Error! Adding default value type to sparseList!");
         }
@@ -86,7 +86,7 @@ public:
         }
     }
 
-    T &operator[](const size_t& index) {
+    T & at(const size_t& index) override{
         if (index >= capacity) {
             throw std::invalid_argument("Error! Index went out of bounds!");
         }
