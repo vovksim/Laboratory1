@@ -8,6 +8,7 @@
 #include <tuple>
 #include <vector>
 #include <algorithm>
+#include "sparseContainer.h"
 
 
 template<typename A>
@@ -62,10 +63,6 @@ class sparseMatrix : public sparseContainer<A> {
     }
 
 public:
-    explicit sparseMatrix(A defaultValue) {
-        this->defaultValue = defaultValue;
-    }
-
     explicit sparseMatrix(std::vector<std::pair<std::pair<std::size_t, std::size_t>, A>> input) {
         std::size_t columnTempQuantity = 0, rowTempQuantity = 0;
         for (auto &iter: input) {
