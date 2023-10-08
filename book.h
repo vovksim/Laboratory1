@@ -24,6 +24,15 @@ class Book {
     std::size_t releaseYear;
     std::vector<fullName> vectorAuthor;
     std::vector<character> vectorCharacter;
+public:
+    Book(std::string &bookName, std::string &annotation, std::size_t releaseYear, std::vector<fullName> vectorAuthor,
+         std::vector<character> vectorCharacter) {
+        this->bookName = bookName;
+        this->annotation = annotation;
+        this->releaseYear = releaseYear;
+        this->vectorAuthor = vectorAuthor;
+        this->vectorCharacter = vectorCharacter;
+    }
 };
 
 class fullName {
@@ -51,6 +60,7 @@ public:
     void setName(std::string &nameIn) {
         this->name = nameIn;
     }
+
     void setSurname(std::string &surnameIn) {
         this->surname = surnameIn;
     }
