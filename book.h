@@ -36,13 +36,15 @@ public:
 };
 
 class fullName {
-    std::string name;
-    std::string surname;
+    std::string name{};
+    std::string surname{};
 public:
     explicit fullName(const std::pair<std::string, std::string> &fullName) {
         name = fullName.first;
         surname = fullName.second;
     }
+
+    fullName() = default;
 
     fullName(std::string &name, std::string &surname) {
         this->name = name;
@@ -67,7 +69,7 @@ public:
 };
 
 class character {
-    fullName pseudonim;
+    fullName pseudonim{};
     std::map<Book, role> mapParticipationIn;
 };
 
