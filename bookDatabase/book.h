@@ -14,11 +14,11 @@ class book {
     std::string annotation{};
     std::size_t releaseYear{};
     std::vector<fullName> vectorAuthor{};
-    std::vector<lib::character> vectorCharacter{};
+    std::vector<character> vectorCharacter{};
 public:
     book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
          std::vector<fullName> &&vectorAuthor,
-         std::vector<lib::character> &&vectorCharacter);
+         std::vector<character> &&vectorCharacter);
 
     bool operator<(const book &rhs) const;
 
@@ -30,7 +30,7 @@ public:
 
     std::vector<fullName> getVectorAuthor() const;
 
-    std::vector<lib::character> getVectorCharacter() const;
+    std::vector<character> getVectorCharacter() const;
 
 
     friend class Library;
