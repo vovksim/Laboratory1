@@ -9,22 +9,33 @@
 #include "character.h"
 #include <set>
 
-class Book {
+class book {
     std::string bookName{};
     std::string annotation{};
     std::size_t releaseYear{};
     std::vector<fullName> vectorAuthor{};
     std::vector<lib::character> vectorCharacter{};
 public:
-    Book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
+    book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
          std::vector<fullName> &&vectorAuthor,
          std::vector<lib::character> &&vectorCharacter);
 
-    bool operator<(const Book &rhs) const;
+    bool operator<(const book &rhs) const;
+
+    std::string getName() const;
+
+    std::string getAnnotation() const;
+
+    std::size_t getReleaseYear() const;
+
+    std::vector<fullName> getVectorAuthor() const;
+
+    std::vector<lib::character> getVectorCharacter() const;
+
 
     friend class Library;
 
-    Book();
+    book();
 };
 
 

@@ -4,7 +4,7 @@
 
 #include "book.h"
 
-Book::Book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
+book::book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
            std::vector<fullName> &&vectorAuthor,
            std::vector<lib::character> &&vectorCharacter) {
     this->bookName = bookName;
@@ -14,9 +14,29 @@ Book::Book(std::string &&bookName, std::string &&annotation, std::size_t release
     this->vectorCharacter = vectorCharacter;
 }
 
-bool Book::operator<(const Book &rhs) const {
+bool book::operator<(const book &rhs) const {
     return this->releaseYear < rhs.releaseYear;
 }
 
+std::string book::getName() const {
+    return bookName;
+}
 
-Book::Book() = default;
+std::string book::getAnnotation() const {
+    return annotation;
+}
+
+std::size_t book::getReleaseYear() const {
+    return releaseYear;
+}
+
+std::vector<fullName> book::getVectorAuthor() const {
+    return vectorAuthor;
+}
+
+std::vector<lib::character> book::getVectorCharacter() const {
+    return vectorCharacter;
+}
+
+
+book::book() = default;
