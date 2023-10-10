@@ -6,6 +6,7 @@
 #include "catch2/catch.hpp"
 #include "../sparseMatrix.h"
 #include <random>
+#include "genRandomData.h"
 
 TEST_CASE("Add() test", "[sparseMatrix]") {
     std::random_device rgen;
@@ -65,5 +66,21 @@ TEST_CASE("Add() test", "[sparseMatrix]") {
             }
         }
     }
+}
+
+
+TEST_CASE("showMatrix() test", "[sparseMatrix]") {
+    sparseMatrix<std::string> testItem;
+    int data{};
+    std::vector<std::string> data2{"a", "b"};
+    generateRandomData(data2);
+    for (auto &a: data2) {
+        std::cout << a << std::endl;
+    }
+    generateRandomData(data);
+    std::ostringstream expectedOutput;
+    std::ostringstream output;
+    testItem.print(output);
+    REQUIRE(output.str() == expectedOutput.str());
 }
 
