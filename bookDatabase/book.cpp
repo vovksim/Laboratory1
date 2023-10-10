@@ -6,7 +6,7 @@
 
 book::book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
            std::vector<fullName> &&vectorAuthor,
-           std::vector<lib::character> &&vectorCharacter) {
+           std::vector<character> &&vectorCharacter) {
     this->bookName = bookName;
     this->annotation = annotation;
     this->releaseYear = releaseYear;
@@ -34,7 +34,7 @@ std::vector<fullName> book::getVectorAuthor() const {
     return vectorAuthor;
 }
 
-std::vector<lib::character> book::getVectorCharacter() const {
+std::vector<character> book::getVectorCharacter() const {
     return vectorCharacter;
 }
 
