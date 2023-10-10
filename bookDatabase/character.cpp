@@ -8,7 +8,7 @@ character::character(fullName &&pseudonim, role &&participation) {
     pairNameParticipation.second = participation;
 }
 
-bool character::operator==(character &rhs) {
+bool character::operator==(const character &rhs) const {
     return this->pairNameParticipation.first == rhs.pairNameParticipation.first;
 }
 

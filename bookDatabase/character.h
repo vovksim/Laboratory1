@@ -15,7 +15,7 @@ public:
 
     character(fullName &&pseudonim, role &&participation);
 
-    bool operator==(character &rhs);
+    bool operator==(const character &rhs) const;
 
     bool operator<(const character &rhs) const {
         return this->getName() < rhs.getName();
