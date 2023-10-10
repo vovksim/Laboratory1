@@ -8,23 +8,23 @@
 #include "role.h"
 #include "fullName.h"
 
-namespace lib {
-    class character {
-        std::pair<fullName, role> pairNameParticipation;
-    public:
-        character();
+class character {
+    std::pair<fullName, role> pairNameParticipation;
+public:
+    character();
 
-        character(fullName &&pseudonim, role &&participation);
+    character(fullName &&pseudonim, role &&participation);
 
-        bool operator==(character &rhs);
+    bool operator==(character &rhs);
 
-        bool operator<(const lib::character &rhs) const{
-            return this->getName() < rhs.getName();
-        }
+    bool operator<(const character &rhs) const {
+        return this->getName() < rhs.getName();
+    }
 
-        fullName getName () const;
-    };
-}
+    fullName getName() const;
+
+    role getRole() const;
+};
 
 
 #endif //LAB1_4_2_CHARACTER_H

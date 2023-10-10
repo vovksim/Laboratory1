@@ -3,21 +3,25 @@
 //
 #include "character.h"
 
-lib::character::character(fullName &&pseudonim, role &&participation) {
+character::character(fullName &&pseudonim, role &&participation) {
     pairNameParticipation.first = pseudonim;
     pairNameParticipation.second = participation;
 }
 
-bool lib::character::operator==(character &rhs) {
+bool character::operator==(character &rhs) {
     return this->pairNameParticipation.first == rhs.pairNameParticipation.first;
 }
 
-bool operator<(const lib::character &lhs, const lib::character &rhs) {
+bool operator<(const character &lhs, const character &rhs) {
     return lhs.getName() < rhs.getName();
 }
 
-lib::character::character() = default;
+character::character() = default;
 
-fullName lib::character::getName() const{
+fullName character::getName() const{
     return pairNameParticipation.first;
+}
+
+role character::getRole() const {
+    return pairNameParticipation.second;
 }
