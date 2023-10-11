@@ -13,12 +13,12 @@ bool character::operator==(const character &rhs) const {
 }
 
 bool operator<(const character &lhs, const character &rhs) {
-    return lhs.getName() < rhs.getName();
+    return lhs.getPseudonim() < rhs.getPseudonim();
 }
 
 character::character() = default;
 
-fullName character::getName() const{
+fullName character::getPseudonim() const{
     return pairNameParticipation.first;
 }
 

@@ -18,10 +18,10 @@ public:
     bool operator==(const character &rhs) const;
 
     bool operator<(const character &rhs) const {
-        return this->getName() < rhs.getName();
+        return this->getPseudonim() < rhs.getPseudonim();
     }
 
-    fullName getName() const;
+    fullName getPseudonim() const;
 
     role getRole() const;
 };
