@@ -25,7 +25,7 @@ public:
 
     void setSurname(std::string &surnameIn);
 
-    bool operator==(fullName& rhs);
+    bool operator==(const fullName& rhs) const;
 
     bool operator<(const fullName& rhs) const;
 };
