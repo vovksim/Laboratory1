@@ -32,9 +32,6 @@ public:
 
     std::vector<character> getVectorCharacter() const;
 
-
-    friend class Library;
-
     book();
 };
 
