@@ -21,6 +21,8 @@ public:
         return this->getPseudonim() < rhs.getPseudonim();
     }
 
+    std::string getStringFormFullName() const;
+
     fullName getPseudonim() const;
 
     role getRole() const;

@@ -18,10 +18,14 @@ bool operator<(const character &lhs, const character &rhs) {
 
 character::character() = default;
 
-fullName character::getPseudonim() const{
+fullName character::getPseudonim() const {
     return pairNameParticipation.first;
 }
 
 role character::getRole() const {
     return pairNameParticipation.second;
+}
+
+std::string character::getStringFormFullName() const {
+    return this->getPseudonim().getName() + " " + this->getPseudonim().getSurname();
 }
