@@ -17,7 +17,7 @@ class Library {
 public:
     void addBook(const book &bookToAdd);
 
-    void getCharacterInfo(character &character);
+    void printCharacterInfo(character &character);
 
     void insertBookToAppropriatePosition(const book &bookToAddInLibrary);
 
