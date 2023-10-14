@@ -30,6 +30,8 @@ public:
     void addSeries(std::set<book>& setOfBook, std::string& seriesName);
 
     void removeBook(book &bookToDelete);
+
+    const std::set<book>& getCharacterBookSet(const character& characterToGetInfo) const;
 };
 
 #endif //LAB1_4_2_LIBRARY_H

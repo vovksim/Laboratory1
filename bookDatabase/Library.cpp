@@ -115,3 +115,11 @@ void Library::removeBook(book &bookToDelete) {
     }
 }
 
+const std::set<book> &Library::getCharacterBookSet(const character &characterToGetInfo) const {
+    for (auto &i: mapCharacterInfo) {
+        if (i.first == characterToGetInfo) {
+            return i.second;
+        }
+    }
+}
+
