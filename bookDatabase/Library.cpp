@@ -50,42 +50,41 @@ std::pair<bool, std::string> Library::isBookSerial(const book &lhs, const book &
 }
 
 void Library::print(std::ostream &out) {
-    std::cout << std::endl;
-    std::cout << "<-----Library----->" << std::endl;
+    std::cout << "-----Library-----" << std::endl;
     printUnseried();
     printSeried();
-    std::cout << "<----------------->" << std::endl;
+    std::cout << "-----------------" << std::endl;
 }
 
 void Library::printUnseried(std::ostream &out) const {
-    std::cout << "Unseried books: ";
+    std::cout << "Unseried books: " << std::endl;
     bool wasPrinted = false;
     for (auto &i: vectorBooksSeries) {
-        if (i.first.size() == 1) {
+        if (i.first.size() == 1 || i.second == std::string{}) {
             wasPrinted = true;
-            std::cout << i.first.cbegin()->getName() << "; ";
+            std::cout << *(i.first.cbegin()) << "; ";
         }
     }
     if (!wasPrinted) {
-        std::cout << "none" << std::endl;
-    } else {
-        std::cout << std::endl;
+        std::cout << "none";
     }
+    std::cout << std::endl;
 }
 
 void Library::printSeried(std::ostream &out) const {
     bool wasPrinted = false;
+    std::cout << "Seried books: " << std::endl;
     for (auto &i: vectorBooksSeries) {
         if (i.first.size() > 1) {
             wasPrinted = true;
-            std::cout << i.second << ": ";
+            std::cout << i.second << ": " << std::endl;
             for (auto &j: i.first) {
-                std::cout << j.getName() << "; ";
+                std::cout << j << std::endl;
             }
         }
     }
-    if (wasPrinted) {
-        std::cout << std::endl;
+    if(!wasPrinted) {
+        std::cout << "none" << std::endl;
     }
 }
 
