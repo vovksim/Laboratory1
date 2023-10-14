@@ -15,12 +15,13 @@ class book {
     std::size_t releaseYear{};
     std::vector<fullName> vectorAuthor{};
     std::vector<character> vectorCharacter{};
+    std::size_t pageQuantity;
 public:
-    book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
+    book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear, std::size_t pageQuantity,
          std::vector<fullName> &&vectorAuthor,
          std::vector<character> &&vectorCharacter);
 
-    bool operator<(const book &rhs) const;
+    book();
 
     std::string getName() const;
 
@@ -28,11 +29,16 @@ public:
 
     std::size_t getReleaseYear() const;
 
+    std::size_t getPageQuantity() const;
+
     std::vector<fullName> getVectorAuthor() const;
 
     std::vector<character> getVectorCharacter() const;
 
-    book();
+    bool operator<(const book &rhs) const;
+
+    bool operator==(const book& rhs) const;
+
 };
 
 

@@ -4,7 +4,7 @@
 
 #include "book.h"
 
-book::book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear,
+book::book(std::string &&bookName, std::string &&annotation, std::size_t releaseYear, std::size_t pageQuantity,
            std::vector<fullName> &&vectorAuthor,
            std::vector<character> &&vectorCharacter) {
     this->bookName = bookName;
@@ -12,6 +12,7 @@ book::book(std::string &&bookName, std::string &&annotation, std::size_t release
     this->releaseYear = releaseYear;
     this->vectorAuthor = vectorAuthor;
     this->vectorCharacter = vectorCharacter;
+    this->pageQuantity=pageQuantity;
 }
 
 bool book::operator<(const book &rhs) const {
@@ -36,6 +37,15 @@ std::vector<fullName> book::getVectorAuthor() const {
 
 std::vector<character> book::getVectorCharacter() const {
     return vectorCharacter;
+}
+
+bool book::operator==(const book &rhs) const {
+    return this->getName() == rhs.getName() && this->releaseYear == rhs.releaseYear &&
+        this->getVectorAuthor() == rhs.getVectorAuthor() && this->getPageQuantity()==rhs.getPageQuantity();
+}
+
+std::size_t book::getPageQuantity() const {
+    return pageQuantity;
 }
 
 

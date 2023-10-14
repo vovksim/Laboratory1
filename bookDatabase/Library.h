@@ -30,8 +30,6 @@ public:
     void addSeries(std::set<book>& setOfBook, std::string& seriesName);
 
     void removeBook(book &bookToDelete);
-
-    void printCharacterParticipation(character &character);
 };
 
 #endif //LAB1_4_2_LIBRARY_H
