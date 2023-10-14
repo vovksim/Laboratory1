@@ -8,6 +8,7 @@
 #include <map>
 #include "character.h"
 #include <set>
+#include "../helper.h"
 
 class book {
     std::string bookName{};
@@ -35,9 +36,11 @@ public:
 
     std::vector<character> getVectorCharacter() const;
 
+    friend std::ostream &operator<<(std::ostream &out, const book &bookToPrint);
+
     bool operator<(const book &rhs) const;
 
-    bool operator==(const book& rhs) const;
+    bool operator==(const book &rhs) const;
 
 };
 

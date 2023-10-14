@@ -21,6 +21,8 @@ public:
         return this->getPseudonim() < rhs.getPseudonim();
     }
 
+    friend std::ostream& operator<<(std::ostream& out, character& characterToPrint);
+
     std::string getStringFormFullName() const;
 
     fullName getPseudonim() const;

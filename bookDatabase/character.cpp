@@ -29,3 +29,9 @@ role character::getRole() const {
 std::string character::getStringFormFullName() const {
     return this->getPseudonim().getName() + " " + this->getPseudonim().getSurname();
 }
+
+std::ostream &operator<<(std::ostream &out, character &characterToPrint) {
+    out << characterToPrint.pairNameParticipation.first << " (" << characterToPrint.pairNameParticipation.second
+        << ")";
+    return out;
+}
