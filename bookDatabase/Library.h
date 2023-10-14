@@ -27,7 +27,7 @@ public:
 
     void printSeried(std::ostream &out = std::cout) const;
 
-    void addSeries(std::set<book> setOfBook, std::string seriesName);
+    void addSeries(std::set<book>& setOfBook, std::string& seriesName);
 
     void removeBook(book &bookToDelete);
 
