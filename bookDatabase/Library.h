@@ -8,14 +8,30 @@
 #include "book.h"
 
 
-
 class Library {
-    std::vector<std::pair<std::vector<Book>,std::string>> mapBooksSeries;
-    std::map<lib::character, std::set<Book>> mapCharacterInfo;
-    friend class Book;
+    std::vector<std::pair<std::set<book>, std::string>> vectorBooksSeries;
+    std::map<character, std::set<book>> mapCharacterInfo;
+
+    static std::pair<bool, std::string> isBookSerial(const book &lhs, const book &rhs);
+
 public:
-    void addBook(const Book& bookToAdd);
-    void getCharacterInfo(lib::character& character);
+    void addBook(const book &bookToAdd);
+
+    void getCharacterInfo(character &character);
+
+    void insertBookToAppropriatePosition(const book &bookToAddInLibrary);
+
+    void print(std::ostream &out = std::cout);
+
+    void printUnseried(std::ostream &out = std::cout) const;
+
+    void printSeried(std::ostream &out = std::cout) const;
+
+    void addSeries(std::set<book> setOfBook, std::string seriesName);
+
+    void removeBook(book &bookToDelete);
+
+    void printCharacterParticipation(character &character);
 };
 
 #endif //LAB1_4_2_LIBRARY_H
