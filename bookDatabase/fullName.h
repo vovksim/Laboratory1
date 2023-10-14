@@ -25,6 +25,8 @@ public:
 
     void setSurname(std::string &surnameIn);
 
+    friend std::ostream& operator<<(std::ostream& out, fullName& pseudonim);
+
     bool operator==(const fullName& rhs) const;
 
     bool operator<(const fullName& rhs) const;

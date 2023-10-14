@@ -32,10 +32,15 @@ void fullName::setSurname(std::string &surnameIn) {
     this->surname = surnameIn;
 }
 
-bool fullName::operator==(const fullName &rhs) const{
+bool fullName::operator==(const fullName &rhs) const {
     return ((this->name == rhs.name) && (this->surname == rhs.surname));
 }
 
-bool fullName::operator<(const fullName &rhs) const{
+bool fullName::operator<(const fullName &rhs) const {
     return this->name < rhs.name && this->surname < rhs.surname;
+}
+
+std::ostream &operator<<(std::ostream &out, fullName &pseudonim) {
+    out << pseudonim.getName() << " " << pseudonim.getSurname();
+    return out;
 }
